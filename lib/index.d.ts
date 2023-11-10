@@ -115,3 +115,5 @@ declare class InstagramBasicDisplayApi {
         fields: string
     ): Promise<UserMedia>;
 }
+
+export default InstagramBasicDisplayApi;
