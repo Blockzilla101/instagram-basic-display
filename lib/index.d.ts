@@ -46,6 +46,7 @@ interface Config {
     appId: string;
     redirectUri: string;
     appSecret: string;
+    scopes: string[];
 }
 
 declare class InstagramBasicDisplayApi {
