@@ -1,8 +1,13 @@
-interface RefreshAccessToken {
+interface LongLivedToken {
     access_token: string;
     token_type: "bearer";
     /** Number of seconds till the token expires */
     expires_in: number;
+}
+
+interface ShortLivedToken {
+    access_token: string;
+    user_id: string;
 }
 
 type InstagramAccountType = "BUSINESS" | "MEDIA_CREATOR" | "PERSONAL";
@@ -65,23 +70,23 @@ declare class InstagramBasicDisplayApi {
     /**
      * Refreshes an unexpired long-life access token
      * @param accessToken a user's long-life access token
-     * @returns {Promise<RefreshAccessToken>}
+     * @returns {Promise<LongLivedToken>}
      */
-    refreshLongLivedToken(accessToken: string): Promise<RefreshAccessToken>;
+    refreshLongLivedToken(accessToken: string): Promise<LongLivedToken>;
 
     /**
      * Retrieves an access token (ttl: 1h)
      * @param userCode can be found in querystring of redirect URI after authorization
-     * @returns {Promise<RefreshAccessToken>}
+     * @returns {Promise<ShortLivedToken>}
      */
-    retrieveToken(userCode: string): Promise<RefreshAccessToken>;
+    retrieveToken(userCode: string): Promise<ShortLivedToken>;
 
     /**
      * Retrieves an longer living access token (ttl: 60d)
      * @param accessToken user's access token
-     * @returns {Promise<RefreshAccessToken>}
+     * @returns {Promise<LongLivedToken>}
      */
-    retrieveLongLivedToken(accessToken: string): Promise<RefreshAccessToken>;
+    retrieveLongLivedToken(accessToken: string): Promise<LongLivedToken>;
 
     /**
      * Retrieves information about the user
